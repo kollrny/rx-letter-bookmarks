@@ -10,7 +10,7 @@ const $=id=>document.getElementById(id);
 const STORE='rx-letter-apple-v4';
 const clean=s=>s.normalize('NFKC').replace(/[\p{P}\p{Z}\s]/gu,'');
 let state={found:[],peeled:[],page:-1,opened:false},canStore=true,motionOff=false;
-try{const old=JSON.parse(localStorage.getItem(STORE));if(old&&Array.isArray(old.found)){state.found=[...new Set(old.found.filter(i=>Number.isInteger(i)&&i>=0&&i<8))];state.peeled=Array.isArray(old.peeled)?[...new Set(old.peeled.filter(i=>state.found.includes(i)))]:[...state.found];state.page=-1; // Always welcome her on the cover; keep collected bookmarks.state.opened=old.opened===true&&state.peeled.length===8;}motionOff=localStorage.getItem('rx-motion')==='off';}catch(e){canStore=false}
+try{const old=JSON.parse(localStorage.getItem(STORE));if(old&&Array.isArray(old.found)){state.found=[...new Set(old.found.filter(i=>Number.isInteger(i)&&i>=0&&i<8))];state.peeled=Array.isArray(old.peeled)?[...new Set(old.peeled.filter(i=>state.found.includes(i)))]:[...state.found];state.page=-1;state.opened=old.opened===true&&state.peeled.length===8;}motionOff=localStorage.getItem('rx-motion')==='off';}catch(e){canStore=false}
 const has=i=>state.found.includes(i),peeled=i=>state.peeled.includes(i);
 const short=['分享','记挂','靠近','倾听','初恋','相见','以后','喜欢'];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
